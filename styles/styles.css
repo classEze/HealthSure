@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+form > div {
+     @apply w-9/12 flex justify-end items-center my-8 ml-8
+}
+form > div > input {
+@apply w-4/6 h-16 text-center border-gray-400 border-2
+}
+form > div > label {
+     @apply font-semibold text-xl
+}
+a{
+@apply border-t-2 border-b-2 border-gray-500}
+.home-card{
+     @apply text-center  text-xl shadow-xl mb-4 border-gray-400 border-t-2
+}
+p.word{
+     @apply text-center text-white bg-blue-500 text-3xl py-3 font-semibold
+}
+section.flasher{
+     animation: flash 0.8s reverse infinite
+}
+@keyframes flash {
+     to{ background:rgb(36, 36, 151)}  
+}
