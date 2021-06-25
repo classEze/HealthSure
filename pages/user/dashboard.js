@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import SideUser from '../../components/sideuser';
-import HOC from '../../components/authUserHOC';
+import HOC from 'top/components/authUserHOC';
 import {useSelector} from 'react-redux';
-import TabplusText from '../../components/tabplustext';
+import TabplusText from 'top/components/tabplustext';
 import {FaAndroid, FaBell, FaBookmark, FaHistory, FaHome, FaHospital, FaPen, FaPlusCircle, FaUserCheck} from 'react-icons/fa'
 import {GiTestTubes} from 'react-icons/gi'
 import {BsFilePost} from 'react-icons/bs'
