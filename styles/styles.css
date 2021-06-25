@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+main form{
+     @apply py-4 bg-gray-50 shadow-2xl w-10/12 mx-auto my-5;
+     box-shadow: 1px 1px 3px 3px gray
+}
+form > div, select{
+     @apply w-10/12  my-4 mx-auto relative
+}
+select{
+     text-align-last:center;
+     height:50px;
+     border:0.5px solid rgb(189, 104, 104);
+     @apply mx-auto my-4 block bg-gray-300;
+}
+button:active{
+     border: none;
+     outline: none;
+}
+form > div > input {
+@apply w-full h-14 text-center border-gray-400 border 
+}
+form > div > label {
+     @apply text-lg absolute font-mono left-4 top-0 rounded-xl transform -translate-y-1/2 bg-gray-50 px-2 py-0 text-blue-500                                                                                                                                                                                                                                                                                          
+}
+.home-card{
+     @apply text-center  text-xl shadow-xl mb-4 border-gray-400 border-t-2
+}
+p.word{
+     @apply text-center text-white bg-blue-500 text-3xl py-3 font-semibold
+}
+section.flasher{
+     animation: flash 0.8s reverse infinite
+}
+@keyframes flash {
+     to{ background:rgb(36, 36, 151)}  
+}
+div.radio-div > p {
+ @apply flex flex-col items-center cursor-pointer
+}
+
+input[type=radio]{
+    width:20px;
+    height:20px;
+    /* appearance: none;
+    background-color:beige;
+    color:black;
+    border:0.2px solid black */
+}
+main.main-home{
+     background-image:url('/images/hospital.svg');
+     background-size:cover;
+     background-position:center;
+     background-repeat:no-repeat;
+     grid-template-rows: max-content 1fr;
+}
+div.transparent > svg {
+     @apply text-2xl
+}
+main.dash > svg {
+@apply bg-blue-500 p-4
+}
+
+div.filter-buttons > * {
+     cursor:pointer
+}
+

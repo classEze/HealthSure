@@ -1,0 +1,23 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+div#__next{
+  display:grid;
+  grid-template-rows: 80px 1fr max-content;
+  min-height:100vh;
+  background-color: red;
+  background:url('https://www.freepik.com/free-vector/flat-hand-drawn-hospital-reception-scene_11906113.htm#page=1&query=hospital&position=16')
+}
