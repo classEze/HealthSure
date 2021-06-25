@@ -7,7 +7,7 @@ import {formatRelative} from 'date-fns'
 import HOC from 'top/components/authHospitalHOC'
 
 
-const Treatment = ({pendingTreatments, acceptedTreatments, completedTreatmentserror}) => {
+const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatmentserror}) => {
      const state = useSelector(state=>state)
      const [branch, setBranch] = useState(0)
      function cancel_Booking(e){
@@ -102,4 +102,4 @@ export async function getServerSideProps(context){
           }
      }
 }
-export default HOC(Treatment)
+export default HOC(Treatments)
