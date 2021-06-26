@@ -41,7 +41,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
                        <p> Date created: {treatment.createdOn}</p>
                        <p> Date Reserved: {treatment.date_reserved}</p>
                        { treatment.status==0 && <button className='p-2 bg-blue-500 rounded-md mt-2 text-white' data-identifier={treatment._id} onClick={accept_Booking}> Accept Booking </button>}
-                       { treatment.status==0 && <button className='p-2 bg-blue-500 rounded-md mt-2 text-white' data-identifier={treatment._id} onClick={delete_Record}> Delete Record </button>}
+                       { treatment.status==-1 && <button className='p-2 bg-blue-500 rounded-md mt-2 text-white' data-identifier={treatment._id} onClick={delete_Record}> Delete Record </button>}
 
                    </div>
                         )
@@ -58,6 +58,12 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
                        <p> Status: Accepted</p>
                        <p> Date created: {treatment.createdOn}</p>
                        <p> Date Reserved: {treatment.date_reserved}</p>
+                       <button 
+                       className='p-2 bg-blue-500 rounded-md mt-2 text-white'
+                        data-identifier={treatment._id} 
+                        onClick={accept_Booking}>
+                              Complete Booking
+                         </button>
                    </div>
                         )
                    })}
@@ -87,7 +93,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
 export async function getServerSideProps(context){
      connect_DB(mongoose)
      try{
-          const fetchedTreatments0 = await Treatment.find({hospital_id:context.params.id, status: 0 || -1})
+          const fetchedTreatments0 = await Treatment.find({ hospital_id:context.params.id, $or:[ {status:0}, {status:-1}]})
           const fetchedTreatments1 = await Treatment.find({hospital_id:context.params.id, status:1})
           const fetchedTreatments2 = await Treatment.find({hospital_id:context.params.id, status:2})
           return {
