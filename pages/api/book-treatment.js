@@ -13,12 +13,13 @@ const Treat = async (req, res) => {
                initiator_id:req.user.id,
                hospital_id:req.body.center,
                initiator_email_address:req.body.email,
-               hospital_email:hospital.email,
+               hospital_email_address:hospital.email,
                complaint:req.body.complaint,
                type:req.body.type,
           })
           send_single_Message(req.body.email, "Treatment Booking", `Hello, ${user.firstname}, Your booking has been successfuly sent to ${hospital.brand} hospital. You will be notified when it is accepted. Thanks.`)
           send_single_Message(hospital.email, "Treatment Booking", `Hello, ${user.firstname}, just booked for medical treatment at ${hospital.brand}. Please Log in to Healthtrack to see details of this request. Thanks`)
+          console.log('success')
        return res.status(200).json({message:'Booking Successful'})
      }
      catch(err){

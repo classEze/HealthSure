@@ -1,5 +1,6 @@
 import connect_DB from 'top/db'
 import mongoose from 'mongoose'
+import { useState } from 'react';
 import Treatment from 'top/Models/treatments'
 import SideUser from 'top/components/sideuser'
 import { useSelector } from 'react-redux'
@@ -7,20 +8,22 @@ import {formatRelative} from 'date-fns'
 import HOC from 'top/components/authHospitalHOC'
 
 
-const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatmentserror}) => {
+const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments, error}) => {
      const state = useSelector(state=>state)
      const [branch, setBranch] = useState(0)
-     function cancel_Booking(e){
+     function delete_Record(e){
          alert(e.target.dataset.identifier)
      }
-
+     function accept_Booking(e){
+         alert(e.target.dataset.identifier)
+     }
      return (
           <>
           <main>
           <p className='text-center text-xl mt-2 border-b font-bold'> Your Treatment Schedule </p>
                {state.show && <SideUser />}
                <section className='p-2 bg-blue-500 text-white'>
-               <p className='text-center font-bold text-xl uppercase'> Covid 19 Test Centers in Nigeria</p>
+               <p className='text-center font-bold text-xl uppercase'> TREATMENTS</p>
             <div className='px-4 items-end mt-2 filter-buttons flex justify-between'>
                  <p style={{ borderBottom: branch==0? "1px solid white" : ""}} onClick={()=>setBranch(0)}> Pending</p>
                  <p style={{ borderBottom: branch==1? "1px solid white" : ""}} onClick={()=>setBranch(1)}> Accepted</p>
@@ -34,10 +37,11 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatmentse
                      return(
                    <div key={treatment._id} className='w-5/6 mx-auto rounded-xl font-bold shadow-md mb-4 p-4 bg-white'>
                        <p> Type: {treatment.type}</p>
-                       <p> Status: Pending</p>
+                       <p> Status: { treatment.status==0? "Pending" : "Cancelled" }</p>
                        <p> Date created: {treatment.createdOn}</p>
                        <p> Date Reserved: {treatment.date_reserved}</p>
-                       <button className='p-2 bg-blue-500 rounded-md mt-2 text-white' data-identifier={treatment._id} onClick={cancel_Booking}> Cancel Booking </button>
+                       { treatment.status==0 && <button className='p-2 bg-blue-500 rounded-md mt-2 text-white' data-identifier={treatment._id} onClick={accept_Booking}> Accept Booking </button>}
+                       { treatment.status==0 && <button className='p-2 bg-blue-500 rounded-md mt-2 text-white' data-identifier={treatment._id} onClick={delete_Record}> Delete Record </button>}
 
                    </div>
                         )
@@ -83,7 +87,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatmentse
 export async function getServerSideProps(context){
      connect_DB(mongoose)
      try{
-          const fetchedTreatments0 = await Treatment.find({hospital_id:context.params.id, status:0})
+          const fetchedTreatments0 = await Treatment.find({hospital_id:context.params.id, status: 0 || -1})
           const fetchedTreatments1 = await Treatment.find({hospital_id:context.params.id, status:1})
           const fetchedTreatments2 = await Treatment.find({hospital_id:context.params.id, status:2})
           return {

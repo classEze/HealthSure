@@ -24,6 +24,9 @@ const state = useSelector(state=>state);
                <TabplusText to='/coming' text1="Treated" text2='Patients'>
                     <FaHospital size={40} />
                </TabplusText>
+               <TabplusText to={"/hospital/treatments/"+state.user.id} text1="Treatment" text2='Records'>
+                    <FaHospital size={40} />
+               </TabplusText>
         </main>   
    );
 }
