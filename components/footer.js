@@ -10,7 +10,7 @@ export default function Footer() {
     <p>Blog</p>
     <p>FAQ</p>
     <p>Contact Us</p>
-    <p><a href='https://health-sure.vercel.app/public/files/manual.docx'> Download User Manual </a> </p>
+    <p><a href='/files/manual.docx'> Download User Manual </a> </p>
     </section>
     </> 
   )
