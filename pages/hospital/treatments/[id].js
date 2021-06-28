@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux'
 import {formatRelative} from 'date-fns'
 import HOC from 'top/components/authHospitalHOC'
 import router from 'next/router';
+import axios from 'axios'
+
 
 
 const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments, error}) => {

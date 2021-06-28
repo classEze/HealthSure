@@ -5,6 +5,7 @@ import SideUser from 'top/components/sideuser'
 import { useSelector } from 'react-redux'
 import HOC from 'top/components/authUserHOC'
 import { useState } from 'react'
+import axios from 'axios'
 
 
 const TreatmentComponent = ({pendingTreatments, acceptedTreatments, completedTreatments, error}) => {
