@@ -14,6 +14,6 @@ const Accept = async (req, res) => {
           return res.status(500).json({message:err.message})
      }
    }
-   export default authHos(Delete)
+   export default authHos(Accept)
 
 //    .lookup({from:"Users", localField:"initiator_id", foreignField:"_id", as:"Joined"})

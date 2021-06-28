@@ -3,7 +3,7 @@ import authHos from 'top/Middlewares/authHos'
 import Treatment from "top/Models/treatments"
 import User from "top/Models/user"
 
-const Accept = async (req, res) => {
+const Complete = async (req, res) => {
      try{
          const result = await Treatment.findByIdAndUpdate(req.query.id, {status:1})
          const user = await User.findById(result.initiator_id)
@@ -14,4 +14,4 @@ const Accept = async (req, res) => {
           return res.status(500).json({message:err.message})
      }
    }
-   export default authHos(Delete)
+   export default authHos(Complete)
