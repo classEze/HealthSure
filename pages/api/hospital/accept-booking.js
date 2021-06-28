@@ -11,7 +11,7 @@ const Accept = async (req, res) => {
          const hospital = await Hospital.findById(result.hospital_id)
 
          send_single_Message(result.initiator_email_address, "Treatment Booking", `Hello, ${user.firstname}, Your booking has been accepted by ${hospital.brand}. You can attend treatment as scheduled. Regards.`)
-         return res.status(200).json({message:'Request Successful'});
+         return res.status(200).json({message:'Treatment booking Accepted'});
      }
      catch(err){
           return res.status(500).json({message:err.message})

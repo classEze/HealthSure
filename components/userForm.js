@@ -9,8 +9,7 @@ export default function UserForm(){
      function submit_User(values){
           axios.post('/api/register', {...values, mac_address:router.query.mac, bluetooth_address:router.query.device })
           .then(res=>{
-            alert(res.data);
-            window.location.assign('https://health-sure.vercel.app/login?message=Registeration was Successful')
+            window.location.assign('https://health-sure.vercel.app/login?message=Account created. Enter your credentials to login')
           })
           .catch(err=>alert(err.message))
         }
@@ -51,7 +50,7 @@ export default function UserForm(){
                </div>
                <div>
                <label htmlFor="">Age</label>
-                 <input type='age' required onChange={formik.handleChange('age')} value={formik.values.age} placeholder='please enter your age'/>
+                 <input type='number' required onChange={formik.handleChange('age')} value={formik.values.age} placeholder='please enter your age'/>
                </div>
                <div>
                <label htmlFor="">Email</label>

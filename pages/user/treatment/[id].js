@@ -6,9 +6,11 @@ import { useSelector } from 'react-redux'
 import HOC from 'top/components/authUserHOC'
 import { useState } from 'react'
 import axios from 'axios'
+import {useRouter} from 'next/router'
 
 
 const TreatmentComponent = ({pendingTreatments, acceptedTreatments, completedTreatments, error}) => {
+     const router = useRouter()
      const state = useSelector(state=>state)
      const [branch, setBranch] = useState(0)
      const [message, setMessage] = useState('')
@@ -17,7 +19,7 @@ const TreatmentComponent = ({pendingTreatments, acceptedTreatments, completedTre
           axios.post(`/api/user/cancel-booking?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
           .then(res=>{
                setMessage(res.data.message)
-               setTimeout(()=>window.location.assign('https://health-sure.vercel.app/user/dashboard'), 2000)
+               setTimeout(()=>router.replace('/user/dashboard'), 2000)
           })
           .catch(err=>setMessage(err.message))
      }

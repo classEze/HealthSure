@@ -6,7 +6,7 @@ export default function HospitalForm(){
           axios.post('/api/register', values)
           .then(res=> {
                alert('Account successfuly Created')
-               window.location.assign('https://health-sure.vercel.app/login?message=Registeration was Successful')
+               window.location.assign('https://health-sure.vercel.app/login?message=Account created. Enter Credentials to login')
           })
           .catch(err=>alert("Error creating User", err.message))
         }
@@ -25,7 +25,7 @@ export default function HospitalForm(){
                (formik)=>{
                     return(
                          <Form>
-                    <h1 className='text-center text-2xl font-semibold'> Register a Hospital</h1>
+                    <h1 className='text-center text-2xl font-semibold'> Create a Hospital Account</h1>
                     <div>
                     <label htmlFor="brand"> Brand name </label>
                     <input onChange={formik.handleChange('brand')} value={formik.values.brand} placeholder='please input brand name'  type='text'/>
@@ -40,7 +40,7 @@ export default function HospitalForm(){
                     </div>
                     <div>
                     <label> Date </label>
-                    <input type='text' required onChange={formik.handleChange('when')} value={formik.values.when} placeholder='Date Established - dd/mm/yy'/>
+                    <input type='date' required onChange={formik.handleChange('when')} value={formik.values.when} placeholder='Date Established - dd/mm/yy'/>
                     </div>
                     <div>
                     <label> Email </label>

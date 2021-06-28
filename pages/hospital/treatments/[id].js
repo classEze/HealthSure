@@ -2,15 +2,17 @@ import connect_DB from 'top/db'
 import mongoose from 'mongoose'
 import { useState } from 'react';
 import Treatment from 'top/Models/treatments'
-import SideUser from 'top/components/sideuser'
 import { useSelector } from 'react-redux'
 import {formatRelative} from 'date-fns'
 import HOC from 'top/components/authHospitalHOC'
 import axios from 'axios'
+import {useRouter} from 'next/router';
+import SideHos from 'top/components/sideHospital';
 
 
 
 const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments, error}) => {
+     const router = useRouter()
      const state = useSelector(state=>state)
      const [branch, setBranch] = useState(0)
      const [message, setMessage] = useState('')
@@ -20,7 +22,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
           axios.post(`/api/hospital/delete-record?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
           .then(res=>{
                setMessage(res.data.message)
-               setTimeout(()=>window.location.assign('https://health-sure.vercel.app/hospital/dashboard'), 2000)
+               setTimeout(()=>router.replace('/hospital/dashboard'), 2000)
           })
           .catch(err=>setMessage(err.message))
      }
@@ -29,7 +31,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
           axios.post(`/api/hospital/accept-booking?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
           .then(res=>{
                setMessage(res.data.message)
-               setTimeout(()=>window.location.assign('https://health-sure.vercel.app/hospital/dashboard'), 2000)
+               setTimeout(()=>router.replace('/hospital/dashboard'), 2000)
           })
           .catch(err=>setMessage(err.message))
      }
@@ -38,7 +40,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
           axios.post(`/api/hospital/complete-treatment?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
           .then(res=>{
                setMessage(res.data.message)
-               setTimeout(()=>window.location.assign('https://health-sure.vercel.app/hospital/dashboard'), 2000)
+               setTimeout(()=>router.replace('/hospital/dashboard'), 2000)
           })
           .catch(err=>setMessage(err.message))
      }
@@ -47,7 +49,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
           axios.post(`/api/hospital/clear-record?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
           .then(res=>{
                setMessage(res.data.message)
-               setTimeout(()=>window.location.assign('https://health-sure.vercel.app/hospital/dashboard'), 2000)
+               setTimeout(()=>router.replace('/hospital/dashboard'), 2000)
           })
           .catch(err=>setMessage(err.message))
      }
@@ -55,7 +57,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
           <>
           <main>
           <p className='text-center text-xl mt-2 border-b font-bold'> Your Treatment Schedule </p>
-               {state.show && <SideUser />}
+               {state.show && <SideHos />}
                <section className='p-2 bg-blue-500 text-white'>
                <p className='text-center font-bold text-xl uppercase'> TREATMENTS</p>
             <div className='px-4 items-end mt-2 filter-buttons flex justify-between'>
