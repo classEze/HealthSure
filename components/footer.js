@@ -1,6 +1,3 @@
-// import Head from 'next/head'
-// import Image from 'next/image'
-// import {useState, useCallback,useEffect} from 'react'
 
 export default function Footer() {
   return (

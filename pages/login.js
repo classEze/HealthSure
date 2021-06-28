@@ -24,8 +24,8 @@ export default function Login(){
         role:res.data.user?.role,
         token:res.data.token,
         id:res.data.user.id}))
-        router.push(`${res.data.user.role}/dashboard?token=${res.data.token}`)
-      // window.location.assign(`https://health-sure.vercel.app/${res.data.user.role}/dashboard?token=${res.data.token}`)
+        // router.push(`${res.data.user.role}/dashboard?token=${res.data.token}`)
+      window.location.assign(`https://health-sure.vercel.app/${res.data.user.role}/dashboard?token=${res.data.token}`)
     })
     .catch(err=>{
       setMessage(err.message)
