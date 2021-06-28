@@ -35,7 +35,7 @@ export default function Login(){
     <>
     <main className="grid items-center">
     {show && <HomeNav />}
-    {router.query?.message}
+    <p className="text-center my-2 text-green-300 font-bold"> {router.query?.message}  </p>
     <form  onSubmit={handle_Login}>
       <h1 className='text-3xl font-semibold text-center'> Login</h1>
       <p className='text-red-500 text-xl text-center my-2'>{message}</p>

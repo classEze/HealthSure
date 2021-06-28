@@ -14,7 +14,7 @@ const TreatmentComponent = ({pendingTreatments, acceptedTreatments, completedTre
      const [message, setMessage] = useState('')
      function cancel_Booking(e){
           const id = e.target.dataset.identifier
-          axios.post(`/api/user/cancel-booking?id=${id}`, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
+          axios.post(`/api/user/cancel-booking?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
           .then(res=>{
                setMessage(res.data.message)
                setTimeout(()=>router.push('/user/dashboard'), 2000)
@@ -44,7 +44,7 @@ const TreatmentComponent = ({pendingTreatments, acceptedTreatments, completedTre
                        <p> Type: {treatment.type}</p>
                        <p> Status: Pending</p>
                        <p> Date created: {treatment.createdAt}</p>
-                       <p> Date Reserved: {treatment.date_reserved}</p>
+                       <p> Date Reserved: {treatment.date}</p>
                        <button className='p-2 bg-blue-500 rounded-md mt-2 text-white' data-identifier={treatment._id} onClick={cancel_Booking}> Cancel Booking </button>
                    </div>
                         )

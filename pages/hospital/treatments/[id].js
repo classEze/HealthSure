@@ -18,7 +18,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
 
      function delete_Record(e){
           const id = e.target.dataset.identifier
-          axios.post(`/api/hospital/delete-record?id=${id}`, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
+          axios.post(`/api/hospital/delete-record?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
           .then(res=>{
                setMessage(res.data.message)
                setTimeout(()=>router.push('/hospital/dashboard'), 2000)
@@ -27,7 +27,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
      }
      function accept_Booking(e){
           const id = e.target.dataset.identifier
-          axios.post(`/api/hospital/accept-booking?id=${id}`, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
+          axios.post(`/api/hospital/accept-booking?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
           .then(res=>{
                setMessage(res.data.message)
                setTimeout(()=>router.push('/hospital/dashboard'), 2000)
@@ -36,7 +36,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
      }
      function complete_Booking(e){
           const id = e.target.dataset.identifier
-          axios.post(`/api/hospital/complete-treatment?id=${id}`, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
+          axios.post(`/api/hospital/complete-treatment?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
           .then(res=>{
                setMessage(res.data.message)
                setTimeout(()=>router.push('/hospital/dashboard'), 2000)
@@ -45,7 +45,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
      }
      function clear_Record(e){
           const id = e.target.dataset.identifier
-          axios.post(`/api/hospital/clear-record?id=${id}`, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
+          axios.post(`/api/hospital/clear-record?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
           .then(res=>{
                setMessage(res.data.message)
                setTimeout(()=>router.push('/hospital/dashboard'), 2000)
@@ -75,7 +75,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
                        <p> Type: {treatment.type}</p>
                        <p> Status: { treatment.status==0? "Pending" : "Cancelled" }</p>
                        <p> Date created: {treatment.createdAt}</p>
-                       <p> Date Reserved: {treatment.date_reserved}</p>
+                       <p> Date Reserved: {treatment.date}</p>
                        { treatment.status==0 && <button className='p-2 bg-blue-500 rounded-md mt-2 text-white' data-identifier={treatment._id} onClick={accept_Booking}> Accept Booking </button>}
                        { treatment.status==-1 && <button className='p-2 bg-blue-500 rounded-md mt-2 text-white' data-identifier={treatment._id} onClick={delete_Record}> Delete Record </button>}
 
@@ -93,7 +93,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
                        <p> Type: {treatment.type}</p>
                        <p> Status: Accepted</p>
                        <p> Date created: {treatment.createdAt}</p>
-                       <p> Date Reserved: {treatment.date_reserved}</p>
+                       <p> Date Reserved: {treatment.date}</p>
                        <button 
                        className='p-2 bg-blue-500 rounded-md mt-2 text-white'
                         data-identifier={treatment._id} 
@@ -114,7 +114,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
                        <p> Type: {treatment.type}</p>
                        <p> Status: Completed</p>
                        <p> Date created: {treatment.createdAt}</p>
-                       <p> Date Reserved: {treatment.date_reserved}</p>
+                       <p> Date Reserved: {treatment.date}</p>
                        <button className='p-2 bg-blue-500 rounded-md mt-2 text-white' data-identifier={treatment._id}
                         onClick={clear_Record}> Clear Record </button>
 
