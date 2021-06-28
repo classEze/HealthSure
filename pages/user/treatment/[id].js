@@ -3,7 +3,6 @@ import mongoose from 'mongoose'
 import Treatment from 'top/Models/treatments'
 import SideUser from 'top/components/sideuser'
 import { useSelector } from 'react-redux'
-import {formatRelative} from 'date-fns'
 import HOC from 'top/components/authUserHOC'
 import { useState } from 'react'
 
@@ -11,10 +10,16 @@ import { useState } from 'react'
 const TreatmentComponent = ({pendingTreatments, acceptedTreatments, completedTreatments, error}) => {
      const state = useSelector(state=>state)
      const [branch, setBranch] = useState(0)
+     const [message, setMessage] = useState('')
      function cancel_Booking(e){
-         alert(e.target.dataset.identifier)
+          const id = e.target.dataset.identifier
+          axios.post(`/api/user/cancel-booking?id=${id}`, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
+          .then(res=>{
+               setMessage(res.data.message)
+               setTimeout(()=>router.push('/user/dashboard'), 2000)
+          })
+          .catch(err=>setMessage(err.message))
      }
-
      return (
           <>
           <main>
@@ -27,6 +32,7 @@ const TreatmentComponent = ({pendingTreatments, acceptedTreatments, completedTre
                  <p style={{ borderBottom: branch==1? "1px solid white" : ""}} onClick={()=>setBranch(1)}> Accepted</p>
                  <p style={{ borderBottom: branch==2? "1px solid white" : ""}} onClick={()=>setBranch(2)}> Completed</p>
             </div>
+            <p className="text-center my-2 text-green-300 font-bold"> {message} </p>
           </section>
           { branch==0 && (
                <section className="mt-4">
@@ -52,7 +58,7 @@ const TreatmentComponent = ({pendingTreatments, acceptedTreatments, completedTre
                    <div key={treatment._id} className='w-5/6 mx-auto rounded-xl font-bold shadow-md mb-4 p-4 bg-white'>
                        <p> Type: {treatment.type}</p>
                        <p> Status: Accepted</p>
-                       <p> Date created: {treatment.createdOn}</p>
+                       <p> Date created: {treatment.createdAt}</p>
                        <p> Date booked: {treatment.date}</p>
                    </div>
                         )
@@ -67,19 +73,17 @@ const TreatmentComponent = ({pendingTreatments, acceptedTreatments, completedTre
                    <div key={treatment._id} className='w-5/6 mx-auto rounded-xl font-bold shadow-md mb-4 p-4 bg-white'>
                        <p> Type: {treatment.type}</p>
                        <p> Status: Completed</p>
-                       <p> Date created: {treatment.createdOn}</p>
+                       <p> Date created: {treatment.createdAt}</p>
                        <p> Date booked: {treatment.date}</p>
                    </div>
                         )
                    })}
               </section>
          )}
-
           </main>
           </>
      )
 }
-
 export async function getServerSideProps(context){
      connect_DB(mongoose)
      try{

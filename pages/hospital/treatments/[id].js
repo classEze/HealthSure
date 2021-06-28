@@ -6,16 +6,49 @@ import SideUser from 'top/components/sideuser'
 import { useSelector } from 'react-redux'
 import {formatRelative} from 'date-fns'
 import HOC from 'top/components/authHospitalHOC'
+import router from 'next/router';
 
 
 const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments, error}) => {
      const state = useSelector(state=>state)
      const [branch, setBranch] = useState(0)
+     const [message, setMessage] = useState('')
+
      function delete_Record(e){
-         alert(e.target.dataset.identifier)
+          const id = e.target.dataset.identifier
+          axios.post(`/api/hospital/delete-record?id=${id}`, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
+          .then(res=>{
+               setMessage(res.data.message)
+               setTimeout(()=>router.push('/hospital/dashboard'), 2000)
+          })
+          .catch(err=>setMessage(err.message))
      }
      function accept_Booking(e){
-         alert(e.target.dataset.identifier)
+          const id = e.target.dataset.identifier
+          axios.post(`/api/hospital/accept-booking?id=${id}`, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
+          .then(res=>{
+               setMessage(res.data.message)
+               setTimeout(()=>router.push('/hospital/dashboard'), 2000)
+          })
+          .catch(err=>setMessage(err.message))
+     }
+     function complete_Booking(e){
+          const id = e.target.dataset.identifier
+          axios.post(`/api/hospital/complete-treatment?id=${id}`, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
+          .then(res=>{
+               setMessage(res.data.message)
+               setTimeout(()=>router.push('/hospital/dashboard'), 2000)
+          })
+          .catch(err=>setMessage(err.message))
+     }
+     function clear_Record(e){
+          const id = e.target.dataset.identifier
+          axios.post(`/api/hospital/clear-record?id=${id}`, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
+          .then(res=>{
+               setMessage(res.data.message)
+               setTimeout(()=>router.push('/hospital/dashboard'), 2000)
+          })
+          .catch(err=>setMessage(err.message))
      }
      return (
           <>
@@ -29,6 +62,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
                  <p style={{ borderBottom: branch==1? "1px solid white" : ""}} onClick={()=>setBranch(1)}> Accepted</p>
                  <p style={{ borderBottom: branch==2? "1px solid white" : ""}} onClick={()=>setBranch(2)}> Completed</p>
             </div>
+            <p className="text-center my-2 text-green-300 font-bold"> {message} </p>
           </section>
           { branch==0 && (
                <section className="mt-4">
@@ -38,7 +72,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
                    <div key={treatment._id} className='w-5/6 mx-auto rounded-xl font-bold shadow-md mb-4 p-4 bg-white'>
                        <p> Type: {treatment.type}</p>
                        <p> Status: { treatment.status==0? "Pending" : "Cancelled" }</p>
-                       <p> Date created: {treatment.createdOn}</p>
+                       <p> Date created: {treatment.createdAt}</p>
                        <p> Date Reserved: {treatment.date_reserved}</p>
                        { treatment.status==0 && <button className='p-2 bg-blue-500 rounded-md mt-2 text-white' data-identifier={treatment._id} onClick={accept_Booking}> Accept Booking </button>}
                        { treatment.status==-1 && <button className='p-2 bg-blue-500 rounded-md mt-2 text-white' data-identifier={treatment._id} onClick={delete_Record}> Delete Record </button>}
@@ -56,12 +90,12 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
                    <div key={treatment._id} className='w-5/6 mx-auto rounded-xl font-bold shadow-md mb-4 p-4 bg-white'>
                        <p> Type: {treatment.type}</p>
                        <p> Status: Accepted</p>
-                       <p> Date created: {treatment.createdOn}</p>
+                       <p> Date created: {treatment.createdAt}</p>
                        <p> Date Reserved: {treatment.date_reserved}</p>
                        <button 
                        className='p-2 bg-blue-500 rounded-md mt-2 text-white'
                         data-identifier={treatment._id} 
-                        onClick={accept_Booking}>
+                        onClick={complete_Booking}>
                               Complete Booking
                          </button>
                    </div>
@@ -77,8 +111,11 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
                    <div key={treatment._id} className='w-5/6 mx-auto rounded-xl font-bold shadow-md mb-4 p-4 bg-white'>
                        <p> Type: {treatment.type}</p>
                        <p> Status: Completed</p>
-                       <p> Date created: {treatment.createdOn}</p>
+                       <p> Date created: {treatment.createdAt}</p>
                        <p> Date Reserved: {treatment.date_reserved}</p>
+                       <button className='p-2 bg-blue-500 rounded-md mt-2 text-white' data-identifier={treatment._id}
+                        onClick={clear_Record}> Clear Record </button>
+
                    </div>
                         )
                    })}
