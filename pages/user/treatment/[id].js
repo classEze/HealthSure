@@ -17,7 +17,7 @@ const TreatmentComponent = ({pendingTreatments, acceptedTreatments, completedTre
           axios.post(`/api/user/cancel-booking?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
           .then(res=>{
                setMessage(res.data.message)
-               setTimeout(()=>router.push('/user/dashboard'), 2000)
+               setTimeout(()=>window.location.assign('https://health-sure.vercel.app/user/dashboard'), 2000)
           })
           .catch(err=>setMessage(err.message))
      }

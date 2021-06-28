@@ -6,7 +6,6 @@ import SideUser from 'top/components/sideuser'
 import { useSelector } from 'react-redux'
 import {formatRelative} from 'date-fns'
 import HOC from 'top/components/authHospitalHOC'
-import router from 'next/router';
 import axios from 'axios'
 
 
@@ -21,7 +20,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
           axios.post(`/api/hospital/delete-record?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
           .then(res=>{
                setMessage(res.data.message)
-               setTimeout(()=>router.push('/hospital/dashboard'), 2000)
+               setTimeout(()=>window.location.assign('https://health-sure.vercel.app/hospital/dashboard'), 2000)
           })
           .catch(err=>setMessage(err.message))
      }
@@ -30,7 +29,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
           axios.post(`/api/hospital/accept-booking?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
           .then(res=>{
                setMessage(res.data.message)
-               setTimeout(()=>router.push('/hospital/dashboard'), 2000)
+               setTimeout(()=>window.location.assign('https://health-sure.vercel.app/hospital/dashboard'), 2000)
           })
           .catch(err=>setMessage(err.message))
      }
@@ -39,7 +38,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
           axios.post(`/api/hospital/complete-treatment?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
           .then(res=>{
                setMessage(res.data.message)
-               setTimeout(()=>router.push('/hospital/dashboard'), 2000)
+               setTimeout(()=>window.location.assign('https://health-sure.vercel.app/hospital/dashboard'), 2000)
           })
           .catch(err=>setMessage(err.message))
      }
@@ -48,7 +47,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
           axios.post(`/api/hospital/clear-record?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
           .then(res=>{
                setMessage(res.data.message)
-               setTimeout(()=>router.push('/hospital/dashboard'), 2000)
+               setTimeout(()=>window.location.assign('https://health-sure.vercel.app/hospital/dashboard'), 2000)
           })
           .catch(err=>setMessage(err.message))
      }
