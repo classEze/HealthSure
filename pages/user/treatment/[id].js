@@ -46,7 +46,7 @@ const TreatmentComponent = ({pendingTreatments, acceptedTreatments, completedTre
                        <p> Type: {treatment.type}</p>
                        <p> Status: Pending</p>
                        <p> Date created: {treatment.createdAt}</p>
-                       <p> Date Reserved: {treatment.date}</p>
+                       <p> Date Reserved: {treatment.date_reserved}</p>
                        <button className='p-2 bg-blue-500 rounded-md mt-2 text-white' data-identifier={treatment._id} onClick={cancel_Booking}> Cancel Booking </button>
                    </div>
                         )
@@ -62,7 +62,7 @@ const TreatmentComponent = ({pendingTreatments, acceptedTreatments, completedTre
                        <p> Type: {treatment.type}</p>
                        <p> Status: Accepted</p>
                        <p> Date created: {treatment.createdAt}</p>
-                       <p> Date booked: {treatment.date}</p>
+                       <p> Date Reserved: {treatment.date_reserved}</p>
                    </div>
                         )
                    })}
@@ -77,7 +77,7 @@ const TreatmentComponent = ({pendingTreatments, acceptedTreatments, completedTre
                        <p> Type: {treatment.type}</p>
                        <p> Status: Completed</p>
                        <p> Date created: {treatment.createdAt}</p>
-                       <p> Date booked: {treatment.date}</p>
+                       <p> Date Completed: {treatment.updatedAt}</p>
                    </div>
                         )
                    })}

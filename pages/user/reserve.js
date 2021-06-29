@@ -61,7 +61,7 @@ const Book = ({hospitals}) => {
       </select>
       <div>
       <p> Let us know how you feel: </p>
-      <textarea placeholder='feel free, lets hear your complaint...' onChange={(e)=>setComplaint(e.target.value)} value={complaint}  className='border w-full h-40' required>
+      <textarea placeholder='feel free, lets hear your complaint...' onChange={(e)=>setComplaint(e.target.value)} value={complaint}  className='border w-full p-4 h-40' required>
       </textarea>
       </div>
       <Textinput setter={(e)=>setEmail(e.target.value)} placeholder='please enter your email address' label=" Your Email address" type="email" />

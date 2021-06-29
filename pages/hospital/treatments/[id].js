@@ -8,6 +8,7 @@ import HOC from 'top/components/authHospitalHOC'
 import axios from 'axios'
 import {useRouter} from 'next/router';
 import SideHos from 'top/components/sideHospital';
+import Link from 'next/link';
 
 
 
@@ -35,15 +36,15 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
           })
           .catch(err=>setMessage(err.message))
      }
-     function complete_Booking(e){
-          const id = e.target.dataset.identifier
-          axios.post(`/api/hospital/complete-treatment?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
-          .then(res=>{
-               setMessage(res.data.message)
-               setTimeout(()=>router.replace('/hospital/dashboard'), 2000)
-          })
-          .catch(err=>setMessage(err.message))
-     }
+     // function complete_Booking(e){
+     //      const id = e.target.dataset.identifier
+     //      axios.post(`/api/hospital/complete-treatment?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
+     //      .then(res=>{
+     //           setMessage(res.data.message)
+     //           setTimeout(()=>router.replace('/hospital/dashboard'), 2000)
+     //      })
+     //      .catch(err=>setMessage(err.message))
+     // }
      function clear_Record(e){
           const id = e.target.dataset.identifier
           axios.post(`/api/hospital/clear-record?id=${id}`, {}, {headers:{authorization:`Bearer ${JSON.parse(localStorage.getItem('userInfo')).token}`}})
@@ -94,13 +95,8 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
                        <p> Type: {treatment.type}</p>
                        <p> Status: Accepted</p>
                        <p> Date created: {treatment.createdAt}</p>
-                       <p> Date Reserved: {treatment.date}</p>
-                       <button 
-                       className='p-2 bg-blue-500 rounded-md mt-2 text-white'
-                        data-identifier={treatment._id} 
-                        onClick={complete_Booking}>
-                              Complete Booking
-                         </button>
+                       <p> Date Reserved: {treatment.date_reserved}</p>
+                       <Link href={"/hospital/complete-component?id=" + treatment._id}><a> <button className='p-2 bg-blue-500 rounded-md mt-2 text-white'> Complete Booking </button></a></Link>
                    </div>
                         )
                    })}
@@ -115,7 +111,7 @@ const Treatments = ({pendingTreatments, acceptedTreatments, completedTreatments,
                        <p> Type: {treatment.type}</p>
                        <p> Status: Completed</p>
                        <p> Date created: {treatment.createdAt}</p>
-                       <p> Date Reserved: {treatment.date}</p>
+                       <p> Date Completed: {treatment.updatedAt}</p>
                        <button className='p-2 bg-blue-500 rounded-md mt-2 text-white' data-identifier={treatment._id}
                         onClick={clear_Record}> Clear Record </button>
 
