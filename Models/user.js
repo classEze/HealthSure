@@ -10,7 +10,6 @@ const GeoSchema=new mongoose.Schema({
      firstname:{type:String, required:true},
      lastname:{type:String, required:true},
      nationality:{type:String, required:true},
-     region:{type:String, required:true},
      city:{type:String, required:true},
      age:{type:Number, required:true},
      role:{type:String, default:"user"},
