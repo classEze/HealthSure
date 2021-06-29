@@ -78,6 +78,8 @@ const TreatmentComponent = ({pendingTreatments, acceptedTreatments, completedTre
                        <p> Status: Completed</p>
                        <p> Date created: {treatment.createdAt}</p>
                        <p> Date Completed: {treatment.updatedAt}</p>
+                       <p> Doctor's comment: {treatment.comment}</p>
+                       <p> Drugs given : {treatment.drugs.join(',')}</p>
                    </div>
                         )
                    })}

@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 import TabplusText from 'top/components/tabplustext';
 import {FaAndroid, FaBell, FaBookmark, FaHistory, FaHome, FaHospital, FaPen, FaPlusCircle, FaUserCheck} from 'react-icons/fa'
 import {GiTestTubes} from 'react-icons/gi'
-import {BsFilePost} from 'react-icons/bs'
+import {BsFilePost,BsCalendar} from 'react-icons/bs'
 
 function Dashboard() {
 const state = useSelector(state=>state);
@@ -37,7 +37,7 @@ Android.startDiscovering();
           <FaBell size={40} />
      </TabplusText>
      <TabplusText to={'/user/treatment/'+state.user.id} text1="My treatment" text2='Calendar'>
-          <FaBell size={40} />
+          <BsCalendar size={40} />
      </TabplusText>
      <figure onClick={activate_Tracing} className='flex border-gray-200  border flex-col justify-center py-1 items-center'>
               <p className='inline-flex text-blue-500 p-2 rounded-2xl bg-white shadow-md'>
