@@ -10,7 +10,8 @@ export  default async (req, res) => {
      if(req.body.user ){
           try{
                await User.create (req.body)
-               send_Message(null, null, req.body.firstname)
+               send_Message(null, null, req.body.firstname),
+               console.log(req.body)
                res.status(201).send('User account Successfully created')
              }
              catch(err){
