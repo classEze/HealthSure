@@ -22,7 +22,7 @@ const Bookings = ({bookings,error}) => {
                     return(
                          <div key={booking._id} className='w-5/6 mx-auto text-sm rounded-xl shadow-md my-4 p-4 bg-white'>
                              <p>booking id: {booking._id}</p>
-                             <p> Date created: {formatRelativeRelative( new Date(booking.createdAt) , new Date(), {addSuffix:true})}</p>
+                             <p> Date created: {formatRelative( new Date(booking.createdAt) , new Date(), {addSuffix:true})}</p>
                              <p> Paid : {booking.paid}</p>
                          </div>
                     )
