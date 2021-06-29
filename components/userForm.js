@@ -14,7 +14,7 @@ export default function UserForm(){
           .catch(err=>alert(err.message))
         }
         const userData = {firstname:'', lastname:'',nationality:'',age:'',
-                         city:'', address:'',password:'',confirm:'', user:true
+                        address:'',password:'',confirm:'', user:true
              }
       
      return(
