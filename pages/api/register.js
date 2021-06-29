@@ -15,6 +15,7 @@ export  default async (req, res) => {
                res.status(201).send('User account Successfully created')
              }
              catch(err){
+                  console.log(err.message)
                   res.status(400).send(`Error Creating User ${err.message}`)
              }
      }
