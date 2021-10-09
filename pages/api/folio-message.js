@@ -5,6 +5,7 @@ import Message from 'top/Models/message'
 connect_DB(mongoose)
 
 export  default async (req, res) => {
+    console.log(req.body)
      if(req.body.sender && req.body.title && req.body.message ){
           try{
                await Message.create(req.body);
@@ -13,5 +14,10 @@ export  default async (req, res) => {
        catch(err){
          res.status(400).json({message:"Error, Message could not be saved"})
        }
+     }
+
+     else{
+         res.status(400).json({message:'Useless request'})
+
      }
      }
