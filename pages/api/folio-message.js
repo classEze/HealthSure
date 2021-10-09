@@ -5,8 +5,8 @@ import Cors from "cors"
 
 const cors = Cors({
   methods: ['GET', 'HEAD', 'POST'],
-  origin: '*',
-  optionsSuccessStatus: 200
+  origin: '*'
+
 })
 
 // Helper method to wait for a middleware to execute before continuing
@@ -29,14 +29,14 @@ export  default async (req, res) => {
      if(req.body.sender && req.body.title && req.body.message ){
           try{
                await Message.create(req.body);
-               res.status(201).json({message:"Successfully saved"})
+               return res.status(201).json({message:"Successfully saved"})
              }
        catch(err){
-         res.status(400).json({message:"Error, Message could not be saved"})
+        return res.status(400).json({message:"Error, Message could not be saved"})
        }
      }
 
      else{
-         res.status(400).json({message:'Useless request'})
+        return res.status(400).json({message:'Useless request'})
      }
      }
