@@ -1,10 +1,29 @@
 import mongoose from 'mongoose'
 import connect_DB from 'top/db'
 import Message from 'top/Models/message'
+import Cors from "cors"
+
+const cors = Cors({
+  methods: ['GET', 'HEAD'],
+})
+
+// Helper method to wait for a middleware to execute before continuing
+// And to throw an error when an error happens in a middleware
+function runMiddleware(req, res, fn) {
+  return new Promise((resolve, reject) => {
+    fn(req, res, (result) => {
+      if (result instanceof Error) {
+        return reject(result)
+      }
+      return resolve(result)
+    })
+  })
+}
 
 connect_DB(mongoose)
 
 export  default async (req, res) => {
+     runMiddleware(req,res,cors)
      if(req.body.sender && req.body.title && req.body.message ){
           try{
                await Message.create(req.body);
