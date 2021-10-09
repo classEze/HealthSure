@@ -25,18 +25,18 @@ function runMiddleware(req, res, fn) {
 connect_DB(mongoose)
 
 export  default async (req, res) => {
-     runMiddleware(req,res,cors)
+     await runMiddleware(req,res,cors)
      if(req.body.sender && req.body.title && req.body.message ){
           try{
                await Message.create(req.body);
-               return res.json({message:"Successfully saved"})
+               return res.status(201).json({message:"Successfully saved"})
              }
        catch(err){
-        return res.json({message:"Error, Message could not be saved"})
+        return res.status(400).json({message:"Error, Message could not be saved"})
        }
      }
 
      else{
-        return res.json({message:'Useless request'})
+        return res.status(400).json({message:'Useless request'})
      }
      }
