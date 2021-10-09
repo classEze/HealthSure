@@ -29,14 +29,14 @@ export  default async (req, res) => {
      if(req.body.sender && req.body.title && req.body.message ){
           try{
                await Message.create(req.body);
-               return res.status(201).json({message:"Successfully saved"})
+               return res.json({message:"Successfully saved"})
              }
        catch(err){
-        return res.status(400).json({message:"Error, Message could not be saved"})
+        return res.json({message:"Error, Message could not be saved"})
        }
      }
 
      else{
-        return res.status(400).json({message:'Useless request'})
+        return res.json({message:'Useless request'})
      }
      }
