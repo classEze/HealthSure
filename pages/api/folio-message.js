@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import connect_DB from 'top/db'
-import Message from 'top/Models/hospital'
+import Message from 'top/Models/message'
 
 connect_DB(mongoose)
 
