@@ -4,7 +4,7 @@ import Message from 'top/Models/message'
 import Cors from "cors"
 
 const cors = Cors({
-  methods: ['GET', 'HEAD'],
+  methods: ['GET', 'HEAD', 'POST'],
 })
 
 // Helper method to wait for a middleware to execute before continuing
