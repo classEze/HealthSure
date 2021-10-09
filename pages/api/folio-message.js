@@ -6,7 +6,7 @@ connect_DB(mongoose)
 
 export  default async (req, res) => {
     console.log(req.body)
-    res.status(200).json)({message:"Successful"})
+    res.status(200).json({message:"Successful"})
 //      if(req.body.sender && req.body.title && req.body.message ){
 //           try{
 //                await Message.create(req.body);
